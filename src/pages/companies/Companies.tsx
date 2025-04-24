@@ -166,19 +166,6 @@ export default function Companies() {
     setCurrentPage(page);
   };
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    setCurrentPage(1); // Reset to first page when searching
-    refetch();
-  };
-
-  const handleReset = () => {
-    setSearch('');
-    setCurrentPage(1);
-    setFilterStatus('active');
-    refetch();
-  };
-
   // Generate page numbers array
   const getPageNumbers = () => {
     if (!data) return [];

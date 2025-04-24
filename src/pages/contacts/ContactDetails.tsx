@@ -2,24 +2,24 @@ import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-interface Contact {
+// Define a type for the API response which might be different than our internal types
+interface ContactData {
   id: number;
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  phone: string;
-  address: string;
-  city: string;
-  region: string;
-  country: string;
-  postal_code: string;
-  company_id: number;
+  phone?: string;
+  address?: string;
+  city?: string;
+  region?: string;
+  country?: string;
+  postalCode?: string;
 }
 
 export default function ContactDetails() {
   const { id } = useParams<{ id: string }>();
   
-  const { data: contact, isLoading } = useQuery({
+  const { data: contact, isLoading } = useQuery<ContactData>({
     queryKey: ['contact', id],
     queryFn: async () => {
       const response = await axios.get(`/api/contacts/${id}`);
@@ -39,7 +39,7 @@ export default function ContactDetails() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-semibold text-gray-900">
-          {contact.first_name} {contact.last_name}
+          {contact.firstName} {contact.lastName}
         </h1>
         <div className="flex space-x-3">
           <Link
@@ -66,7 +66,7 @@ export default function ContactDetails() {
             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">Full name</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {contact.first_name} {contact.last_name}
+                {contact.firstName} {contact.lastName}
               </dd>
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -82,7 +82,7 @@ export default function ContactDetails() {
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {contact.address}
                 <br />
-                {contact.city}, {contact.region} {contact.postal_code}
+                {contact.city}, {contact.region} {contact.postalCode}
                 <br />
                 {contact.country}
               </dd>

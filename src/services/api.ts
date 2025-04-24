@@ -3,7 +3,7 @@ import { ApiError, Company, Contact, PaginatedResponse } from '../types';
 
 // Create axios instance with default config
 const api: AxiosInstance = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_URL || '/api',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -54,7 +54,7 @@ export const contactsApi = {
     return response.data;
   },
   
-  getById: async (id: string): Promise<Contact> => {
+  getById: async (id: string | number): Promise<Contact> => {
     const response: AxiosResponse<Contact> = await api.get(`/contacts/${id}`);
     return response.data;
   },
@@ -64,12 +64,12 @@ export const contactsApi = {
     return response.data;
   },
   
-  update: async (id: string, contact: Contact): Promise<Contact> => {
+  update: async (id: string | number, contact: Contact): Promise<Contact> => {
     const response: AxiosResponse<Contact> = await api.put(`/contacts/${id}`, contact);
     return response.data;
   },
   
-  delete: async (id: string): Promise<void> => {
+  delete: async (id: string | number): Promise<void> => {
     await api.delete(`/contacts/${id}`);
   },
 };
@@ -82,7 +82,7 @@ export const companiesApi = {
     return response.data;
   },
   
-  getById: async (id: string): Promise<Company> => {
+  getById: async (id: string | number): Promise<Company> => {
     const response: AxiosResponse<Company> = await api.get(`/companies/${id}`);
     return response.data;
   },
@@ -92,12 +92,12 @@ export const companiesApi = {
     return response.data;
   },
   
-  update: async (id: string, company: Company): Promise<Company> => {
+  update: async (id: string | number, company: Company): Promise<Company> => {
     const response: AxiosResponse<Company> = await api.put(`/companies/${id}`, company);
     return response.data;
   },
   
-  delete: async (id: string): Promise<void> => {
+  delete: async (id: string | number): Promise<void> => {
     await api.delete(`/companies/${id}`);
   },
 };

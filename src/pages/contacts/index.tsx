@@ -104,7 +104,7 @@ const Contacts: React.FC = () => {
                     <tr key={contact.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900">
-                          {contact.first_name} {contact.last_name}
+                          {contact.firstName} {contact.lastName}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
@@ -114,7 +114,7 @@ const Contacts: React.FC = () => {
                         <div className="text-sm text-gray-500">{contact.phone}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-500">{contact.company?.name}</div>
+                        <div className="text-sm text-gray-500">{contact.organization}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
                         <Link
